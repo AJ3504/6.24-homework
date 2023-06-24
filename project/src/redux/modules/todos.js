@@ -1,5 +1,6 @@
 import React from "react";
 import { v4 as uuid } from "uuid";
+import shortid from "shortid";
 
 //action value
 const ADD_TODO = "ADD_TODO";
@@ -25,13 +26,13 @@ export const toggleStatusTodo = (def) => {
 //🦑const initialState = [{}, {}]
 const initialState = [
   {
-    id: uuid(),
+    id: shortid.generate(),
     title: "YET",
     content: "not yet",
     isDone: false,
   },
   {
-    id: uuid(),
+    id: shortid.generate(),
     title: "DONE",
     content: "already done",
     isDone: true,
@@ -40,7 +41,7 @@ const initialState = [
 
 //🦑reducer : 액션을 지정해서, 이렇게 해줘!!
 const todos = (state = initialState, action) => {
-  console.log("콘솔1", state);
+  console.log("리듀서의 parameter로 들어온 state의 콘솔값", state);
   switch (action.type) {
     //
     case ADD_TODO:

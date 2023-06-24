@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { v4 as uuid } from "uuid";
+import shortid from "shortid";
 import { addTodo } from "redux/modules/todos";
 
 export const Form = () => {
@@ -11,7 +11,6 @@ export const Form = () => {
 
   //
   const todos = useSelector((state) => state.todos);
-  console.log("콘솔2", todos);
 
   //
   const dispatch = useDispatch();
@@ -32,7 +31,7 @@ export const Form = () => {
     //   {
     //     type: "ADD_TODO",
     //     payload: {
-    //       id: uuid(),
+    //       id: shortid.generate(),
     //       title,
     //       content,
     //       isDone: false,
@@ -41,7 +40,7 @@ export const Form = () => {
     // )
     dispatch(
       addTodo({
-        id: uuid(),
+        id: shortid.generate(),
         title,
         content,
         isDone: false,
@@ -57,7 +56,7 @@ export const Form = () => {
     // (event) => {
     //   event.preventDefault();
     //   const newTodo = {
-    //     id: uuid(),
+    //     id: shortid.generate(),
     //     title: "",
     //     content: "",
     //     isDone: false,

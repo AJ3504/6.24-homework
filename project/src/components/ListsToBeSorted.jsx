@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { deleteTodo, toggleStatusTodo } from "redux/modules/todos";
 
@@ -25,7 +26,7 @@ export const ListsToBeSorted = () => {
           {todos
             .filter((todo) => todo.isDone === false)
             .map(function (todo) {
-              return !todo.isDone ? (
+              return (
                 <div key={todo.id}>
                   <h5>{todo.title}</h5>
                   <br />
@@ -60,8 +61,12 @@ export const ListsToBeSorted = () => {
                   >
                     삭제
                   </button>
+                  {/* 상세보기 */}
+                  {/* <Link to="/1">상세보기</Link> */}
+                  {/* 🦑/${todo.id}는 todo 객체의 id 값을 포함한 경로를 생성합니다. 예를 들어, todo.id가 9d33d690-48ff-45e3-88ba-e8b3d872433b인 경우, 생성되는 경로는 /9d33d690-48ff-45e3-88ba-e8b3d872433b가 됩니다. */}
+                  <Link to={`/${todo.id}`}>상세보기</Link>
                 </div>
-              ) : null;
+              );
             })}
         </div>
       </div>
@@ -69,7 +74,7 @@ export const ListsToBeSorted = () => {
       <div className="done">
         <h2>Done🎉</h2>
         <div className="done-container">
-          {todos
+          {/* {todos
             .filter((todo) => todo.isDone === true)
             .map(function (todo) {
               return todo.isDone ? (
@@ -87,6 +92,26 @@ export const ListsToBeSorted = () => {
                   </button>
                 </div>
               ) : null;
+            })} */}
+          {todos
+            .filter((todo) => todo.isDone === !false)
+            .map(function (todo) {
+              return (
+                <div key={todo.id}>
+                  <h5>{todo.title}</h5>
+                  <br />
+                  <p>{todo.content}</p>
+                  <br />
+                  <p>완료여부: {todo.isDone.toString()}</p>
+                  <button onClick={() => changeStatusHandler(todo.id)}>
+                    완료취소
+                  </button>
+                  <button onClick={() => deleteStatusHandler(todo.id)}>
+                    삭제
+                  </button>
+                  <Link to={`/${todo.id}`}>상세보기</Link>
+                </div>
+              );
             })}
         </div>
       </div>
